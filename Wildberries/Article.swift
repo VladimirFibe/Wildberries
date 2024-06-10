@@ -12,7 +12,7 @@ struct Article: Identifiable, Hashable {
 
 extension Article {
     static let articles = [
-        Article(title: "Курс Английского", subTitle: "", image: "english", cost: 1.00, count: 0, isDigital: true),
-        Article(title: "Футболка", subTitle: "", image: "shirt", cost: 1.0, count: 0, isDigital: false)
+        Article(title: "Курс Английского", subTitle: "за три месяца", image: "english", cost: 10000.00, count: 0, isDigital: true),
+        Article(title: "Футболка", subTitle: "белая", image: "shirt", cost: 2000.0, count: 0, isDigital: false)
     ]
 }

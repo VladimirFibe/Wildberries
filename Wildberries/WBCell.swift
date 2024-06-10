@@ -12,11 +12,27 @@ final class WBCell: UICollectionViewCell {
         countLabel.isHidden = !(!isDigital && count != 0)
         countLabel.text = "\(count)"
     }
+    
     private let coverView: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
         return $0
     }(UIImageView())
+    
+    private let titleLabel: UILabel = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
+    
+    private let subtitleLabel: UILabel = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
+    
+    private let priceLabel: UILabel = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
     
     private lazy var stepper: UIStepper = {
         $0.addAction(UIAction { _ in
@@ -61,6 +77,9 @@ final class WBCell: UICollectionViewCell {
         setupAddButton()
         setupStepper()
         setupCountLabel()
+        setupTitleLabel()
+        setupSubtitleLabel()
+        setupPriceLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -102,21 +121,47 @@ final class WBCell: UICollectionViewCell {
         ])
     }
     
+    private func setupTitleLabel() {
+        contentView.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: coverView.trailingAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: coverView.topAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor)
+        ])
+    }
+    
+    private func setupSubtitleLabel() {
+        contentView.addSubview(subtitleLabel)
+        NSLayoutConstraint.activate([
+            subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+            subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+        ])
+    }
+    
+    private func setupPriceLabel() {
+        contentView.addSubview(priceLabel)
+        NSLayoutConstraint.activate([
+            priceLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            priceLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 4),
+            priceLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+        ])
+    }
+    
     public func configure(
         with article: Article,
+        count: Int,
         didTapAddButton: (() -> Int)?,
         didStepperChanded: ((Int) -> Int)?
     ) {
         coverView.image = UIImage(named: article.image)
-        count = article.count
+        self.count = count
         isDigital = article.isDigital
+        subtitleLabel.text = article.subTitle
+        titleLabel.text = article.title
+        priceLabel.text = String(format: "%.0f tenge", article.cost)
         stepper.value = Double(count)
         self.didTapAddButton = didTapAddButton
         self.didStepperChanded = didStepperChanded
     }
-}
-
-@available (iOS 17.0, *)
-#Preview {
-    UINavigationController(rootViewController: ArticlesViewController(articles: Article.articles))
 }

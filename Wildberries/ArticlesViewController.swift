@@ -10,7 +10,7 @@ class ArticlesViewController: UIViewController {
     
     private var articles: [Article]
     private lazy var dataSource = makeDataSouce()
-    private var articlesInCart: [String: Int] = [:]
+    private(set) var articlesInCart: [String: Int]
     
     private lazy var collectionView: UICollectionView = {
         let layout = makeLayout()
@@ -19,8 +19,9 @@ class ArticlesViewController: UIViewController {
         return collectionView
     }()
     
-    init(articles: [Article]) {
+    init(articles: [Article], articlesInCart: [String: Int]) {
         self.articles = articles
+        self.articlesInCart = articlesInCart
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -40,9 +41,16 @@ class ArticlesViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.prefersLargeTitles = true
         let cartAction = UIAction { _ in
-            let controller = UINavigationController(rootViewController: UIViewController())
-            controller.view.backgroundColor = .systemBackground
-            self.present(controller, animated: true)
+            
+            let controller = ChartViewController(articles: self.articles.filter {
+                if let count = self.articlesInCart[$0.id] {
+                    return count != 0
+                } else {
+                    return false
+                }
+            }, articlesInCart: self.articlesInCart)
+            controller.delegate = self
+            self.present(UINavigationController(rootViewController: controller), animated: true)
         }
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -80,7 +88,7 @@ extension ArticlesViewController {
         return DataSource(collectionView: collectionView) { collectionView, indexPath, article in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WBCell.identifier,
                                                                 for: indexPath) as? WBCell else { fatalError()}
-            cell.configure(with: article) {
+            cell.configure(with: article, count: self.articlesInCart[article.id] ?? 0) {
                 self.didTapAddButton(for: article)
             } didStepperChanded: { count in
                 self.didStepperChanged(for: article, and: count)
@@ -119,7 +127,9 @@ extension ArticlesViewController {
     }
 }
 
-@available (iOS 17.0, *)
-#Preview {
-    UINavigationController(rootViewController: ArticlesViewController(articles: Article.articles))
+extension ArticlesViewController: CartViewDelegate {
+    func changeChart(with articlesInChart: [String : Int]) {
+        self.articlesInCart = articlesInChart
+        self.collectionView.reloadData()
+    }
 }

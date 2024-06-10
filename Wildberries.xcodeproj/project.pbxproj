@@ -14,6 +14,8 @@
 		AE2A748D2C1564B1006B08C0 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AE2A748C2C1564B1006B08C0 /* Base */; };
 		AE2A74952C156CE8006B08C0 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A74942C156CE8006B08C0 /* Article.swift */; };
 		AE2A74992C15B9C0006B08C0 /* WBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A74982C15B9C0006B08C0 /* WBCell.swift */; };
+		AE2FA88B2C1693180094AAA1 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2FA88A2C1693180094AAA1 /* ChartViewController.swift */; };
+		AE2FA88D2C1693C00094AAA1 /* CartPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2FA88C2C1693C00094AAA1 /* CartPanelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		AE2A748E2C1564B1006B08C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE2A74942C156CE8006B08C0 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		AE2A74982C15B9C0006B08C0 /* WBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WBCell.swift; sourceTree = "<group>"; };
+		AE2FA88A2C1693180094AAA1 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		AE2FA88C2C1693C00094AAA1 /* CartPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPanelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				AE2A74802C1564AF006B08C0 /* AppDelegate.swift */,
 				AE2A74822C1564AF006B08C0 /* SceneDelegate.swift */,
 				AE2A74842C1564AF006B08C0 /* ArticlesViewController.swift */,
+				AE2FA88A2C1693180094AAA1 /* ChartViewController.swift */,
+				AE2FA88C2C1693C00094AAA1 /* CartPanelView.swift */,
 				AE2A74982C15B9C0006B08C0 /* WBCell.swift */,
 				AE2A74942C156CE8006B08C0 /* Article.swift */,
 				AE2A74892C1564B1006B08C0 /* Assets.xcassets */,
@@ -141,10 +147,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE2A74952C156CE8006B08C0 /* Article.swift in Sources */,
+				AE2FA88D2C1693C00094AAA1 /* CartPanelView.swift in Sources */,
 				AE2A74852C1564AF006B08C0 /* ArticlesViewController.swift in Sources */,
 				AE2A74992C15B9C0006B08C0 /* WBCell.swift in Sources */,
 				AE2A74812C1564AF006B08C0 /* AppDelegate.swift in Sources */,
 				AE2A74832C1564AF006B08C0 /* SceneDelegate.swift in Sources */,
+				AE2FA88B2C1693180094AAA1 /* ChartViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
