@@ -2,7 +2,7 @@ import UIKit
 
 final class WBCell: UICollectionViewCell {
     public static var identifier = "WBCell"
-    private var count = 1 { didSet {updateUI()}}
+    private var count = 0 { didSet {updateUI()}}
     private var isDigital = false { didSet {updateUI()}}
     private var didTapAddButton: (() -> Int)?
     private var didStepperChanded: ((Int) -> Int)?
@@ -41,6 +41,9 @@ final class WBCell: UICollectionViewCell {
             }
         }, for: .valueChanged)
         $0.isHidden = true
+        $0.value = 0
+        $0.minimumValue = 0
+        $0.maximumValue = 100
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIStepper())
@@ -65,6 +68,7 @@ final class WBCell: UICollectionViewCell {
         $0.addAction(UIAction { _ in
             if let count = self.didTapAddButton?() {
                 self.count = count
+                self.stepper.value = Double(count)
             }
         }, for: .primaryActionTriggered)
         $0.translatesAutoresizingMaskIntoConstraints = false
